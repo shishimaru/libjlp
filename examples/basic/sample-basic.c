@@ -9,7 +9,7 @@ static char *appid ="YOUR APPLICATION ID";
 int main(int argc, char *argv[]) {
     JLP_Error error = JLP_ERROR_NONE;
     JLP_Context *ctx = JLP_Context_Create(appid);
-    JLP_Context_SetSentence(ctx, "あはは、今日の空はとてもきれいで青いです。");
+    JLP_Context_SetSentence(ctx, "今日の空はとてもきれいで青いです。");
     JLP_Context_SetResults(ctx, JLP_TRUE, JLP_FALSE);
     JLP_Context_SetResponse(ctx, JLP_TRUE, JLP_TRUE, JLP_TRUE, JLP_FALSE,
             JLP_FALSE);

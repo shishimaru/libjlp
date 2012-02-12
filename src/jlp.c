@@ -1,8 +1,8 @@
 #include <string.h>
 #include <curl/curl.h>
+#include <libxml/parser.h>
+#include <libxml/tree.h>
 #include "jlp/jlp.h"
-#include "libxml/parser.h"
-#include "libxml/tree.h"
 
 struct JLP_Context {
     char *appid;
@@ -24,7 +24,7 @@ struct JLP_Result {
     xmlDoc *dom;
 };
 
-static const char *REQUEST_URL = "http://jlp.yahooapis.jp/MAService/V1/parse?";
+static const char *JLP_REQUEST_URL = "http://jlp.yahooapis.jp/MAService/V1/parse?";
 
 JLP_Context *JLP_Context_Create(char *appid) {
     JLP_Error error = JLP_ERROR_NONE;
@@ -56,7 +56,6 @@ ERROR:
     JLP_Context_Dispose(tmp_ctx);
     return NULL;
 }
-
 void JLP_Context_Dispose(JLP_Context *ctx) {
     if(ctx) {
         JLP_Free(ctx -> appid);
@@ -148,11 +147,11 @@ static JLP_Error jlp_requst_url_create(JLP_Context *ctx, char **url) {
     char *tmp_url;
     char *tmp_value;
 
-    if(!(tmp_url = JLP_Calloc(1, strlen(REQUEST_URL) + 1))) {
+    if(!(tmp_url = JLP_Calloc(1, strlen(JLP_REQUEST_URL) + 1))) {
         error = JLP_ERROR_MEMORY;
         goto ERROR;
     }
-    strcpy(tmp_url, REQUEST_URL);
+    strcpy(tmp_url, JLP_REQUEST_URL);
 
     /* appid value */
     if(ctx -> appid) {
